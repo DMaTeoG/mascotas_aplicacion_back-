@@ -172,3 +172,5 @@ class PetClaim(models.Model):
     def __str__(self):
         return f"Reclamo de {self.claimant.username} para '{self.pet.title}' ({self.get_status_display()})"
 
+
+# Enums validated
