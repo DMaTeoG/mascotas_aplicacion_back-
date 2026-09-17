@@ -174,3 +174,4 @@ class PetClaim(models.Model):
 
 
 # Enums validated
+# Geo-coordinates supported
