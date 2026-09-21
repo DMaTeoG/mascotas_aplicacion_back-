@@ -176,3 +176,5 @@ class PetClaimViewSet(viewsets.ModelViewSet):
             'message': 'Reclamo rechazado.',
             'claim_status': claim.status
         }, status=status.HTTP_200_OK)
+
+# Filters applied
