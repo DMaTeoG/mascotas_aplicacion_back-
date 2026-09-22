@@ -178,3 +178,4 @@ class PetClaimViewSet(viewsets.ModelViewSet):
         }, status=status.HTTP_200_OK)
 
 # Filters applied
+# Search query backend
