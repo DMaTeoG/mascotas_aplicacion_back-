@@ -179,3 +179,4 @@ class PetClaimViewSet(viewsets.ModelViewSet):
 
 # Filters applied
 # Search query backend
+# Like action endpoint
