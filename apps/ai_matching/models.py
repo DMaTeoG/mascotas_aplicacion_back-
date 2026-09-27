@@ -29,3 +29,5 @@ class MatchResult(models.Model):
 
     def __str__(self):
         return f"{self.score_percent:.1f}% Match: Perdido #{self.lost_pet_id} vs Encontrado #{self.found_pet_id}"
+
+# Confidence levels validated
