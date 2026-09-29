@@ -151,3 +151,5 @@ def compute_time_similarity(date1, date2) -> tuple[float, float]:
         time_score = 0.3
         
     return time_score, diff_hours
+
+# Haversine distance formula
