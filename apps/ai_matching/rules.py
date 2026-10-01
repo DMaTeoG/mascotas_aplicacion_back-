@@ -155,3 +155,4 @@ def compute_time_similarity(date1, date2) -> tuple[float, float]:
 # Haversine distance formula
 # Breed compatibility matrix
 # Color similarity scoring
+# Time decay scoring
