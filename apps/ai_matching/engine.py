@@ -198,3 +198,5 @@ def run_global_matching(min_threshold: float = 50.0) -> int:
     logger.info(f"[AI-GLOBAL-END] Recálculo global completado. Total coincidencias activas: {count}.")
     return count
 
+
+# XAI natural language summary
