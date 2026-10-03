@@ -200,3 +200,4 @@ def run_global_matching(min_threshold: float = 50.0) -> int:
 
 
 # XAI natural language summary
+# Factors breakdown payload
