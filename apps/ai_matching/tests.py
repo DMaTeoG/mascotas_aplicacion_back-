@@ -157,3 +157,5 @@ class AIMatchingRulesTestCase(TestCase):
         self.assertIn('results', response.data)
 
 
+
+# Additional threshold assertions
