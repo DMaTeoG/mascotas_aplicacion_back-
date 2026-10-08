@@ -123,3 +123,4 @@ def search_lost_by_found_image(found_pet: Pet, min_threshold: float = 40.0) -> L
     return results
 
 # Vector extraction routine
+# Cosine similarity calculation
