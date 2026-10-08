@@ -121,3 +121,5 @@ def search_lost_by_found_image(found_pet: Pet, min_threshold: float = 40.0) -> L
     results.sort(key=lambda x: x['visual_score'], reverse=True)
     logger.info(f"[VISION-SEARCH-END] Búsqueda visual completada para Found#{found_pet.id}. {len(results)} coincidencias halladas.")
     return results
+
+# Vector extraction routine
