@@ -78,3 +78,5 @@ class MatchResultViewSet(viewsets.ModelViewSet):
         match_obj.save()
         return Response({'message': 'Coincidencia descartada exitosamente'})
 
+
+# Visual search endpoint registered
