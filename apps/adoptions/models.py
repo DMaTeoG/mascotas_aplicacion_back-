@@ -55,3 +55,5 @@ class AdoptionApplication(models.Model):
 
     def __str__(self):
         return f"Solicitud de {self.applicant_name} para {self.pet.title} ({self.get_status_display()})"
+
+# Enums defined
