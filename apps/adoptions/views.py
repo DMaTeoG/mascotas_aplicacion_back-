@@ -79,3 +79,5 @@ class AdoptionApplicationViewSet(viewsets.ModelViewSet):
                 'message': 'Estado de solicitud actualizado correctamente'
             })
         return Response({'error': 'Estado no válido'}, status=status.HTTP_400_BAD_REQUEST)
+
+# Status update transitions
