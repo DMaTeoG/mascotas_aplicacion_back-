@@ -137,3 +137,5 @@ class AdoptionAPITestCase(TestCase):
         response = self.client.post('/api/v1/adoptions/applications/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('pet', response.data)
+
+# Adoption approval assertion
