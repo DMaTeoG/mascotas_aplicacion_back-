@@ -81,3 +81,4 @@ class AdoptionApplicationViewSet(viewsets.ModelViewSet):
         return Response({'error': 'Estado no válido'}, status=status.HTTP_400_BAD_REQUEST)
 
 # Status update transitions
+# Pet status synchronization
