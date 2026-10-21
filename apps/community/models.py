@@ -44,3 +44,5 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"[{self.get_notification_type_display()}] {self.title}"
+
+# NotificationItem schema
