@@ -38,3 +38,5 @@ class NotificationViewSet(viewsets.ModelViewSet):
         notification.save()
         return Response({'status': 'marked as read', 'id': notification.id})
 
+
+# Notifications endpoint
