@@ -181,3 +181,5 @@ class PetClaimViewSet(viewsets.ModelViewSet):
 # Search query backend
 # Like action endpoint
 # user_pets endpoint
+
+# Pet claim endpoints
