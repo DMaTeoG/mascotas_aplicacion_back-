@@ -24,3 +24,5 @@ class PetClaimSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'claimant', 'status', 'created_at', 'updated_at']
 
 
+
+# PetClaimSerializer
