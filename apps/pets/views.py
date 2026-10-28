@@ -183,3 +183,4 @@ class PetClaimViewSet(viewsets.ModelViewSet):
 # user_pets endpoint
 
 # Pet claim endpoints
+# Claim approval transitions
