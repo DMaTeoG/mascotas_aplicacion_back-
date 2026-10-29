@@ -153,3 +153,5 @@ class PetAPITestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         ids_in_feed = [p['id'] for p in response.data]
         self.assertNotIn(self.pet_found.id, ids_in_feed)
+
+# Pet claim assertions
