@@ -40,3 +40,4 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
 
 # Notifications endpoint
+# Sanitization safeguard
