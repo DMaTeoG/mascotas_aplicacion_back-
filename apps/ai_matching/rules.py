@@ -156,3 +156,4 @@ def compute_time_similarity(date1, date2) -> tuple[float, float]:
 # Breed compatibility matrix
 # Color similarity scoring
 # Time decay scoring
+# Graceful coordinate fallback
