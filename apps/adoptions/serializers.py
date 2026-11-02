@@ -22,3 +22,4 @@ class AdoptionApplicationSerializer(serializers.ModelSerializer):
             )
         return value
 
+# Validation regex
