@@ -198,3 +198,5 @@ LOGGING = {
     },
 }
 
+
+# Test configuration tuned
