@@ -161,3 +161,4 @@ class AIMatchingRulesTestCase(TestCase):
 # Additional threshold assertions
 
 # Visual search assertions
+# Full pipeline tests
