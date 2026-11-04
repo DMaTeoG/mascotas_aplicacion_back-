@@ -139,3 +139,4 @@ class AdoptionAPITestCase(TestCase):
         self.assertIn('pet', response.data)
 
 # Adoption approval assertion
+# E2E workflow assertions
