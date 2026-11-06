@@ -18,3 +18,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# Verified Python 3.12 runtime
