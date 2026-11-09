@@ -38,37 +38,47 @@ class MatchResultViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'], url_path='visual-search')
     def visual_search(self, request):
-        """Busca en el repositorio de perdidos analizando la coincidencia de imagen de un reporte encontrado."""
+        """Busca en el repositorio de perdidos analizando la coincidencia de imagen real."""
+        from apps.pets.models import Pet, ReportType
+        from apps.pets.serializers import PetSerializer
+        from apps.ai_matching.vision_engine import search_lost_by_found_image, search_lost_by_image
+
         found_pet_id = request.data.get('found_pet_id')
-        if not found_pet_id:
-            return Response({'error': 'El campo found_pet_id es requerido'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        try:
-            from apps.pets.models import Pet, ReportType
-            from apps.pets.serializers import PetSerializer
-            found_pet = Pet.objects.get(id=found_pet_id)
-            if found_pet.report_type != ReportType.FOUND:
-                return Response({'error': 'La mascota debe ser de tipo FOUND (Encontrada)'}, status=status.HTTP_400_BAD_REQUEST)
+        image_url = request.data.get('image_url')
 
-            from apps.ai_matching.vision_engine import search_lost_by_found_image
-            results = search_lost_by_found_image(found_pet)
+        if not found_pet_id and not image_url:
+            return Response({'error': 'Se requiere found_pet_id o image_url'}, status=status.HTTP_400_BAD_REQUEST)
 
-            serialized_results = []
-            for r in results:
-                serialized_results.append({
-                    'lost_pet': PetSerializer(r['lost_pet']).data,
-                    'visual_score': r['visual_score']
-                })
+        results = []
+        found_title = 'Búsqueda Visual por Imagen'
+        found_img = image_url
 
-            return Response({
-                'found_pet_id': found_pet.id,
-                'found_pet_title': found_pet.title,
-                'found_pet_image_url': found_pet.image_url,
-                'matches_count': len(serialized_results),
-                'results': serialized_results
+        if found_pet_id:
+            try:
+                found_pet = Pet.objects.get(id=found_pet_id)
+                found_title = found_pet.title
+                found_img = found_pet.image_url
+                results = search_lost_by_found_image(found_pet)
+            except Pet.DoesNotExist:
+                return Response({'error': 'Mascota no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+        elif image_url:
+            species = request.data.get('species')
+            results = search_lost_by_image(image_url, species=species, min_threshold=30.0)
+
+        serialized_results = []
+        for r in results:
+            serialized_results.append({
+                'lost_pet': PetSerializer(r['lost_pet']).data,
+                'visual_score': r['visual_score']
             })
-        except Pet.DoesNotExist:
-            return Response({'error': 'Mascota encontrada no existe'}, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({
+            'found_pet_id': found_pet_id,
+            'found_pet_title': found_title,
+            'found_pet_image_url': found_img,
+            'matches_count': len(serialized_results),
+            'results': serialized_results
+        })
 
     @action(detail=True, methods=['post'])
     def dismiss(self, request, pk=None):
@@ -77,6 +87,3 @@ class MatchResultViewSet(viewsets.ModelViewSet):
         match_obj.is_dismissed = True
         match_obj.save()
         return Response({'message': 'Coincidencia descartada exitosamente'})
-
-
-# Visual search endpoint registered
