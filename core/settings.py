@@ -147,6 +147,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS & CSRF Configuration for Next.js Frontend (Vercel)
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/.*\.vercel\.app$",
+    r"^http:\/\/localhost:\d+$",
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://mascotas-aplicacion.vercel.app',
+    'http://localhost:3000',
+]
 
 FRONTEND_URL = os.getenv('FRONTEND_URL')
 if FRONTEND_URL:
