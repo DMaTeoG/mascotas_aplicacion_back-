@@ -77,6 +77,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Configuración de Base de Datos (DATABASE_URL de Render / PostgreSQL / SQLite en local)
 DATABASE_URL = os.getenv('DATABASE_URL')
+DB_SCHEMA = os.getenv('DB_SCHEMA', 'mascotas')
+
 if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.config(
@@ -85,6 +87,10 @@ if DATABASE_URL:
             conn_health_checks=True,
         )
     }
+    # Aislamiento por Schema para compartir base de datos con otros proyectos sin colisiones
+    if DB_SCHEMA and 'postgresql' in DATABASES['default'].get('ENGINE', ''):
+        DATABASES['default'].setdefault('OPTIONS', {})
+        DATABASES['default']['OPTIONS']['options'] = f'-c search_path={DB_SCHEMA},public'
 elif os.getenv('DB_NAME'):
     DATABASES = {
         'default': {
