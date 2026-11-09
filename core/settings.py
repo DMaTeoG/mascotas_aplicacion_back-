@@ -4,7 +4,11 @@ Django settings for core project.
 from pathlib import Path
 import os
 import sys
-import dj_database_url
+
+try:
+    import dj_database_url
+except ImportError:
+    dj_database_url = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,7 +83,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASE_URL = os.getenv('DATABASE_URL')
 DB_SCHEMA = os.getenv('DB_SCHEMA', 'mascotas')
 
-if DATABASE_URL:
+if DATABASE_URL and dj_database_url:
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
@@ -124,16 +128,31 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+WHITENOISE_MANIFEST_STRICT = False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS Configuration for Next.js Frontend
+# CORS & CSRF Configuration for Next.js Frontend (Vercel)
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+FRONTEND_URL = os.getenv('FRONTEND_URL')
+if FRONTEND_URL:
+    clean_front = FRONTEND_URL.rstrip('/')
+    CORS_ALLOWED_ORIGINS = [clean_front]
+    CSRF_TRUSTED_ORIGINS = [clean_front]
 
 from datetime import timedelta
 
